@@ -1,0 +1,24 @@
+{
+  "cSpell.language": "en,de",
+  "cSpell.words": [
+    "alecthomas",
+    "assetserver",
+    "Colour",
+    "commitlint",
+    "github",
+    "gomod",
+    "kong",
+    "moznion",
+    "shopspring",
+    "tracklock",
+    "unmarshal",
+    "wailsapp",
+    "yannickkirschen"
+  ],
+  "editor.formatOnSave": true,
+  "editor.wordWrap": "on",
+  "editor.rulers": [
+    80,
+    120
+  ]
+}
