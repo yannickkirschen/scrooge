@@ -12,3 +12,14 @@ old-school spreadsheet, just with a CLI and some cool future functions.
 - 🏗️ Formula for Homebrew
 - ❌ Improved filtering
 - ❌ Documentation
+
+## Installation
+
+Currently brew is the only supported package manager.
+
+### Homebrew
+
+```sh
+brew tap yannickkirschen/tap
+brew install scrooge
+```
