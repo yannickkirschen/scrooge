@@ -15,6 +15,18 @@ builds:
       - windows
       - darwin
 
+brews:
+  - repository:
+      owner: yannickkirschen
+      name: homebrew-tap
+    directory: Formula
+    goarm: "7"
+    homepage: https://github.com/yannickkirschen/scrooge
+    description: Life's expensive - now you see why.
+    license: MIT
+    test: |
+      system "#{bin}/scrooge --help"
+
 archives:
   - formats: [tar.gz]
     # this name template makes the OS and Arch compatible with the results of `uname`.
