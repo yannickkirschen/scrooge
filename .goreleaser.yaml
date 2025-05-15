@@ -16,14 +16,21 @@ builds:
       - darwin
 
 brews:
-  - repository:
-      owner: yannickkirschen
-      name: homebrew-tap
-    directory: Formula
-    goarm: "7"
-    homepage: https://github.com/yannickkirschen/scrooge
+  - homepage: https://github.com/yannickkirschen/scrooge
     description: Life's expensive - now you see why.
     license: MIT
+    repository:
+      owner: yannickkirschen
+      name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_TOKEN }}"
+      pull_request:
+        enabled: false
+    commit_author:
+      name: yannickkirschen
+      email: yannickkirschen@protonmail.com
+    commit_msg_template: "chore(deps): publish {{ .ProjectName }} version {{ .Tag }}"
+    directory: Formula
+    goarm: "7"
     test: |
       system "#{bin}/scrooge --help"
 
