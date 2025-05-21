@@ -164,7 +164,7 @@ func (ctx *Context) SaveToFile() error {
 
 func (ctx *Context) SaveAccounts(accounts []*Account) error {
 	ctx.Model.Accounts = append(ctx.Model.Accounts, accounts...)
-	return nil
+	return ctx.SaveToFile()
 }
 
 func (ctx *Context) SaveAccount(new *Account) error {
@@ -181,7 +181,7 @@ func (ctx *Context) SaveAccount(new *Account) error {
 
 func (ctx *Context) SaveTransactions(txs []*Transaction) error {
 	ctx.Model.Transactions = append(ctx.Model.Transactions, txs...)
-	return nil
+	return ctx.SaveToFile()
 }
 
 func (ctx *Context) SaveTransaction(new *Transaction) error {
