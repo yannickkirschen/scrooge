@@ -6,5 +6,5 @@ import (
 )
 
 func InitExprEnv(ctx *scrooge.Context) {
-	ctx.ExprEnv["lsTx"] = func(ex string) error { return tx.List(ctx, ex) }
+	ctx.ExprEnv["lsTx"] = func(ex string) error { return tx.List(ctx, ex, false) }
 }

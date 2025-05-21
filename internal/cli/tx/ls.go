@@ -15,24 +15,25 @@ import (
 var TimeFormat = "02 Jan 2006"
 var TableModel = tables.NewModel(os.Stdout, 1, 1, 2, ' ', tabwriter.AlignRight)
 
-func List(ctx *scrooge.Context, ex string) error {
+func List(ctx *scrooge.Context, ex string, opaque bool) error {
 	headers := []string{"Id", "Date", "Account", "Status", "Amount", "Balance", "Tags"}
 
 	balance := decimal.NewFromInt(0)
 	data := [][]string{}
 	for _, tx := range ctx.Model.Transactions {
-		// Calculate the balance throughout the loop even if the transaction is
-		// not being displayed.
-		balance = UpdateBalance(balance, *tx.Amount, tx.Type)
-
 		env := ctx.ExprEnv
 		env["tx"] = NewTx(tx)
 
 		if matches, err := filter.Matches(env, ex); err != nil {
 			return err
+		} else if !matches && opaque {
+			balance = UpdateBalance(balance, *tx.Amount, tx.Type)
+			continue
 		} else if !matches {
 			continue
 		}
+
+		balance = UpdateBalance(balance, *tx.Amount, tx.Type)
 
 		var tags bytes.Buffer
 		for _, tag := range tx.Tags {

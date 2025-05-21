@@ -34,6 +34,7 @@ var CLI struct {
 	Tx struct {
 		Ls struct {
 			Filter string `arg:"" optional:""`
+			Opaque bool
 		} `cmd:"" help:"List all transactions."`
 		New struct {
 		} `cmd:"" help:"Add a new transaction."`
@@ -97,9 +98,9 @@ func HandleCommand(scroogeCtx *scrooge.Context, kongCtx *kong.Context) error {
 	case "acc import <path>":
 		err = acc.Import(scroogeCtx, CLI.Acc.Import.Path)
 	case "tx ls":
-		err = tx.List(scroogeCtx, "")
+		err = tx.List(scroogeCtx, "", false)
 	case "tx ls <filter>":
-		err = tx.List(scroogeCtx, CLI.Tx.Ls.Filter)
+		err = tx.List(scroogeCtx, CLI.Tx.Ls.Filter, CLI.Tx.Ls.Opaque)
 	case "tx new":
 		err = tx.New(scroogeCtx)
 	case "tx edit <id>":
