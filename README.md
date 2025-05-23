@@ -9,8 +9,7 @@ old-school spreadsheet, just with a CLI and some cool future functions.
 
 - ✅ Base functionality
 - ✅ Scripting
-- 🏗️ Formula for Homebrew
-- ❌ Improved filtering
+- ✅ Formula for Homebrew
 - ❌ Documentation
 
 ## Installation
