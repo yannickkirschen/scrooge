@@ -59,5 +59,5 @@ func Import(ctx *scrooge.Context, path string) error {
 		txs[i] = tx
 	}
 
-	return ctx.SaveTransactions(txs)
+	return ctx.AddTransactions(txs)
 }

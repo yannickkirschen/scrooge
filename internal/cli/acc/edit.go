@@ -21,5 +21,5 @@ func Edit(ctx *scrooge.Context, id string) error {
 		return fmt.Errorf("account %s not found", id)
 	}
 
-	return editor.EditTplTempStructFile(EditTemplate, &acc, &editCtx{acc}, nil, ctx.TplFuncMap, ctx.SaveAccount)
+	return editor.EditTplTempStructFile(EditTemplate, &acc, &editCtx{acc}, nil, ctx.TplFuncMap, func(acc *scrooge.Account) error { return ctx.EditAccount(id, acc) })
 }

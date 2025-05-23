@@ -162,12 +162,12 @@ func (ctx *Context) SaveToFile() error {
 	return nil
 }
 
-func (ctx *Context) SaveAccounts(accounts []*Account) error {
+func (ctx *Context) AddAccounts(accounts []*Account) error {
 	ctx.Model.Accounts = append(ctx.Model.Accounts, accounts...)
 	return ctx.SaveToFile()
 }
 
-func (ctx *Context) SaveAccount(new *Account) error {
+func (ctx *Context) AddAccount(new *Account) error {
 	if acc, ok := ctx.GetAccount(new.Id); !ok {
 		ctx.Model.Accounts = append(ctx.Model.Accounts, new)
 	} else {
@@ -179,21 +179,36 @@ func (ctx *Context) SaveAccount(new *Account) error {
 	return ctx.SaveToFile()
 }
 
-func (ctx *Context) SaveTransactions(txs []*Transaction) error {
+func (ctx *Context) EditAccount(id string, acc *Account) error {
+	_, i, ok := ctx.Model.GetAccount(acc.Id)
+	if !ok {
+		return fmt.Errorf("account %s not found", acc.Id)
+	}
+
+	acc.Id = id
+	ctx.Model.Accounts[i] = acc
+	return ctx.SaveToFile()
+}
+
+func (ctx *Context) AddTransactions(txs []*Transaction) error {
 	ctx.Model.Transactions = append(ctx.Model.Transactions, txs...)
 	return ctx.SaveToFile()
 }
 
-func (ctx *Context) SaveTransaction(new *Transaction) error {
-	if tx, ok := ctx.GetTransaction(new.Id); !ok {
-		ctx.SetIdFor(tx)
-		ctx.Model.Transactions = append(ctx.Model.Transactions, new)
-	} else {
-		id := tx.Id
-		tx = new
-		tx.Id = id
+func (ctx *Context) AddTransaction(tx *Transaction) error {
+	ctx.SetIdFor(tx)
+	ctx.Model.Transactions = append(ctx.Model.Transactions, tx)
+	return ctx.SaveToFile()
+}
+
+func (ctx *Context) EditTransaction(id uint64, tx *Transaction) error {
+	_, i, ok := ctx.Model.GetTransaction(tx.Id)
+	if !ok {
+		return fmt.Errorf("transaction %d not found", tx.Id)
 	}
 
+	tx.Id = id
+	ctx.Model.Transactions[i] = tx
 	return ctx.SaveToFile()
 }
 

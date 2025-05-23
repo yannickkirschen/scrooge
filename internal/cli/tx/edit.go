@@ -25,5 +25,5 @@ func Edit(ctx *scrooge.Context, id uint64) error {
 	return editor.EditTplTempStructFile(EditTemplate, &tx, &editCtx{
 		newCtx: newCtx{ctx.AccountRefs, ctx.Tags},
 		Tx:     NewTx(tx),
-	}, nil, ctx.TplFuncMap, ctx.SaveTransaction)
+	}, nil, ctx.TplFuncMap, func(tx *scrooge.Transaction) error { return ctx.EditTransaction(id, tx) })
 }

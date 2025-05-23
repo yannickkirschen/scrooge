@@ -12,5 +12,5 @@ var NewTemplate string
 
 func New(ctx *scrooge.Context) error {
 	var acc *scrooge.Account
-	return editor.EditTplTempStructFile(NewTemplate, &acc, nil, nil, nil, ctx.SaveAccount)
+	return editor.EditTplTempStructFile(NewTemplate, &acc, nil, nil, nil, ctx.AddAccount)
 }

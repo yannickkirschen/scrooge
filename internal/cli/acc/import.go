@@ -32,5 +32,5 @@ func Import(ctx *scrooge.Context, path string) error {
 		}
 	}
 
-	return ctx.SaveAccounts(accounts)
+	return ctx.AddAccounts(accounts)
 }

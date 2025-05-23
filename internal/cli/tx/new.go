@@ -17,5 +17,5 @@ type newCtx struct {
 
 func New(ctx *scrooge.Context) error {
 	var tx *scrooge.Transaction
-	return editor.EditTplTempStructFile(NewTemplate, &tx, &newCtx{ctx.AccountRefs, ctx.Tags}, nil, ctx.TplFuncMap, ctx.SaveTransaction)
+	return editor.EditTplTempStructFile(NewTemplate, &tx, &newCtx{ctx.AccountRefs, ctx.Tags}, nil, ctx.TplFuncMap, ctx.AddTransaction)
 }
