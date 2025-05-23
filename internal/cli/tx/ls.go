@@ -16,11 +16,11 @@ var TimeFormat = "02 Jan 2006"
 var TableModel = tables.NewModel(os.Stdout, 1, 1, 2, ' ', tabwriter.AlignRight)
 
 func List(ctx *scrooge.Context, ex string, opaque bool) error {
-	headers := []string{"Id", "Date", "Account", "Status", "Amount", "Balance", "Tags"}
+	headers := []string{"Id", "Date", "Account", "Description", "Amount", "Balance", "Status", "Tags"}
 
 	balance := decimal.NewFromInt(0)
 	data := [][]string{}
-	for _, tx := range ctx.Model.Transactions {
+	for _, tx := range ctx.Model.SortedTransactions() {
 		env := ctx.ExprEnv
 		env["tx"] = NewTx(tx)
 
@@ -44,16 +44,17 @@ func List(ctx *scrooge.Context, ex string, opaque bool) error {
 		if tx.Type == scrooge.Spending {
 			amount = fmt.Sprintf("-%s %s", tx.Amount.StringFixedBank(2), tx.Currency)
 		} else {
-			amount = fmt.Sprintf("+%s %s", tx.Amount.String(), tx.Currency)
+			amount = fmt.Sprintf("+%s %s", tx.Amount.StringFixedBank(2), tx.Currency)
 		}
 
 		data = append(data, []string{
 			fmt.Sprintf("%d", tx.Id),
 			tx.Date.Format(TimeFormat),
 			tx.Account.Id,
-			string(tx.Status),
+			tx.Description,
 			amount,
 			fmt.Sprintf("%4s %s", balance.String(), tx.Currency),
+			string(tx.Status),
 			tags.String(),
 		})
 	}

@@ -1,5 +1,7 @@
 package scrooge
 
+import "slices"
+
 type Model struct {
 	Accounts     []*Account        `json:"accounts"`
 	Expressions  map[string]string `json:"expressions"`
@@ -24,4 +26,12 @@ func (model *Model) GetTransaction(id uint64) (*Transaction, int, bool) {
 	}
 
 	return nil, -1, false
+}
+
+func (model *Model) SortedTransactions() []*Transaction {
+	txs := make([]*Transaction, len(model.Transactions))
+	copy(txs, model.Transactions)
+
+	slices.SortFunc(txs, func(a, b *Transaction) int { return a.Date.Compare(*b.Date) })
+	return txs
 }
