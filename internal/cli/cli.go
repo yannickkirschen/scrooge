@@ -44,6 +44,9 @@ var CLI struct {
 		Rm struct {
 			Id uint64 `arg:""`
 		} `cmd:"" help:"Delete a transaction by its Id."`
+		Book struct {
+			Ids []uint64 `arg:""`
+		} `cmd:"" help:"Book given transactions."`
 		Import struct {
 			Path string `arg:""`
 		} `cmd:"" help:"Import transactions from a CSV file."`
@@ -107,6 +110,8 @@ func HandleCommand(scroogeCtx *scrooge.Context, kongCtx *kong.Context) error {
 		err = tx.Edit(scroogeCtx, CLI.Tx.Edit.Id)
 	case "tx rm <id>":
 		err = scroogeCtx.DeleteTransaction(CLI.Tx.Rm.Id)
+	case "tx book <ids>":
+		err = tx.Book(scroogeCtx, CLI.Tx.Book.Ids)
 	case "tx import <path>":
 		err = tx.Import(scroogeCtx, CLI.Tx.Import.Path)
 	case "expr new <name>":
