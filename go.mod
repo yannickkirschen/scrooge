@@ -1,11 +1,11 @@
 module github.com/yannickkirschen/scrooge
 
-go 1.25.0
+go 1.26.0
 
 require (
 	github.com/alecthomas/kong v1.16.1
 	github.com/expr-lang/expr v1.17.8
 	github.com/shopspring/decimal v1.4.0
-	golang.org/x/text v0.41.0
+	golang.org/x/text v0.42.0
 	gopkg.in/yaml.v3 v3.0.1
 )
