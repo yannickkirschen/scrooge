@@ -3,7 +3,7 @@ module github.com/yannickkirschen/scrooge
 go 1.26.0
 
 require (
-	github.com/alecthomas/kong v1.16.1
+	github.com/alecthomas/kong v1.17.0
 	github.com/expr-lang/expr v1.17.8
 	github.com/shopspring/decimal v1.6.0
 	golang.org/x/text v0.43.0
