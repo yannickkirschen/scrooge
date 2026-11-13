@@ -6,6 +6,6 @@ require (
 	github.com/alecthomas/kong v1.17.0
 	github.com/expr-lang/expr v1.17.8
 	github.com/shopspring/decimal v1.6.0
-	golang.org/x/text v0.43.0
+	golang.org/x/text v0.44.0
 	gopkg.in/yaml.v3 v3.0.1
 )
